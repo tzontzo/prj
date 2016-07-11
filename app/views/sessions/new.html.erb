@@ -1,0 +1,9 @@
+
+<h1 style="text-align: center" >Log in</h1>
+
+<%= form_for(:session, url: login_path) do |f| %>
+    <p style="margin-left:40%"><%= f.email_field :email, :placeholder => "Email" %></p>
+    <p style="margin-left:40%"><%= f.password_field :password, :placeholder => "Password" %></p>
+    <p style="margin-left:40%"><%= f.submit "Log in"%></p>
+
+<% end %>
