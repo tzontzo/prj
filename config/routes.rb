@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get '/new_project' => 'projects#new'
+  post '/new_project' => 'projects#create'
   get '/admin' => 'users#admin'
   get '/programmer' => 'users#programmer'
   get '/team_leader' => 'users#team_leader'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
