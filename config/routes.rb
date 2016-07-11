@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   get '/admin' => 'users#admin'
   get '/programmer' => 'users#programmer'
-  get '/tleader' => 'users#tleader'
+  get '/team_leader' => 'users#team_leader'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

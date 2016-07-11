@@ -11,10 +11,10 @@ class SessionsController < ApplicationController
           redirect_to '/admin'
         when "programmer"
           redirect_to '/programmer'
-        when "team_leader"
-          redirect_to '/tleader'
+        when "team leader"
+          redirect_to '/team_leader'
         else
-          redirect_to '/login'
+          redirect_to '/'
 
       end
     else

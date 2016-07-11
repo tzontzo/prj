@@ -1,2 +1,18 @@
 <p>Hello admin</p>
+<p>
+  List of users:
+</p>
+<table style="border: 1px solid">
+  <tr >
+    <th style="border: 1px solid">Name</th>
+    <th style="border: 1px solid">Email</th>
+  </tr>
+  <% @user = User.all %>
+  <% @user.each do |user| %>
+  <tr>
+        <td style="border: 1px solid"><%= user.name %></td>
+        <td style="border: 1px solid"><%= user.email %></td><br>
+  </tr>
+  <% end %>
+</table>
 
