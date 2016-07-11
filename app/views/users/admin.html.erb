@@ -1,7 +1,17 @@
-<p>Hello admin</p>
-<p>
-  List of programmers:
+<header >
+<h3>Hello admin</h3>
+<div id="logout_button"><%= button_to "Log out", logout_path, :method => :delete%></div>
+</header>
+<body>
+  <p>
+  <%= link_to "Add new project", controller: "projects", action: "new", id: @project %>|
+    <%= link_to "Add new user", new_user_path, action_name: "new" %>
 </p>
+
+
+<div >
+  List of programmers:
+
 <table style="border: 1px solid">
   <tr >
     <th style="border: 1px solid">Name</th>
@@ -12,13 +22,15 @@
 
   <tr>
         <td style="border: 1px solid"><%= user.name %></td>
-        <td style="border: 1px solid"><%= user.email %></td><br>
+        <td style="border: 1px solid"><%= user.email %></td>
   </tr>
   <% end %>
 </table>
-<p>
+  </div>
+<br>
+<div >
   List of team leaders:
-</p>
+
 <table style="border: 1px solid">
   <tr >
     <th style="border: 1px solid">Name</th>
@@ -29,13 +41,15 @@
 
       <tr>
         <td style="border: 1px solid"><%= user.name %></td>
-        <td style="border: 1px solid"><%= user.email %></td><br>
+        <td style="border: 1px solid"><%= user.email %></td>
       </tr>
   <% end %>
 </table>
-<p>
+</div>
+<br>
+<div >
   List of projects:
-</p>
+
 <table style="border: 1px solid">
   <tr >
     <th style="border: 1px solid">Name</th>
@@ -46,10 +60,10 @@
 
       <tr>
         <td style="border: 1px solid"><%= user.name %></td>
-        <td style="border: 1px solid"><%= user.description %></td><br>
+        <td style="border: 1px solid"><%= user.description %></td>
       </tr>
   <% end %>
 </table>
-<p>
-  <%= link_to "New project", controller: "projects", action: "new", id: @project %>
-</p>
+</div>
+<br>
+</body>
