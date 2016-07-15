@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get '/admin' => 'users#admin'
   get '/programmer' => 'users#programmer'
   get '/team_leader' => 'users#team_leader'
+  get '/projects/:project_id' => 'projects#show'
+  resources :projects
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

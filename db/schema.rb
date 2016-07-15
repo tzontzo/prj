@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711102910) do
+ActiveRecord::Schema.define(version: 20160714060358) do
 
-  create_table "programmers_projects", force: :cascade do |t|
-    t.integer "programmer_id", limit: 4
-    t.integer "project_id",    limit: 4
+  create_table "project_users", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "project_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "programmers_projects", ["programmer_id", "project_id"], name: "index_programmers_projects_on_programmer_id_and_project_id", using: :btree
-  add_index "programmers_projects", ["project_id"], name: "index_programmers_projects_on_project_id", using: :btree
+  add_index "project_users", ["project_id"], name: "index_project_users_on_project_id", using: :btree
+  add_index "project_users", ["user_id"], name: "index_project_users_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",        limit: 255

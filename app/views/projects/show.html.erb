@@ -1,0 +1,46 @@
+<p>Project: <%= @current_project.name%></p>
+
+<p>Details: <%= @current_project.description %></p>
+
+<div>
+  <% @user = User.where('role != ?','admin')%>
+  <p>Users:</p>
+<table style="border: 1px solid">
+  <tr >
+    <th> ID</th>
+    <th >Name</th>
+    <th> Role</th>
+  </tr>
+
+  <% @user.each do |user| %>
+      <tr>
+        <td ><%= user.id %></td>
+        <td ><%= user.name %></td>
+        <td> <%= user.role %></td>
+      </tr>
+  <% end %>
+</table>
+
+</div>
+<p>Add user to project</p>
+
+<br>
+<div>
+  Users working at this project:
+  <table>
+    <tr>
+      <th>Name</th>
+    </tr>
+    <%for f  in @current_project.users.ids do %>
+        <tr>
+          <td><%= @user.find_by(id: f).name %></td>
+        </tr>
+    <%end%>
+
+  </table>
+</div>
+
+<p> <%= link_to "Add user to project" %></p>
+
+
+
