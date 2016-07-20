@@ -9,8 +9,14 @@ Rails.application.routes.draw do
   get '/admin' => 'users#admin'
   get '/programmer' => 'users#programmer'
   get '/team_leader' => 'users#team_leader'
-  get '/projects/:project_id' => 'projects#show'
+  get '/projects/:project_id' => 'projects#show' , as: 'project'
   resources :projects
+  post '/projects/:project_id' => 'projects#user_add'
+  resources :users
+  # resources :users, :member => {:show => :get}
+  # resources :projects,
+  #     :member => { :users => :get , :user_add => :post}
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
