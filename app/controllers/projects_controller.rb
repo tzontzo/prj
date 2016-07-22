@@ -2,11 +2,9 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @users = User.all
   end
   def show
-    @current_project = Project.find(params[:project_id])
-
+    @project = Project.find(params[:project_id])
   end
 
   def create
@@ -20,15 +18,19 @@ class ProjectsController < ApplicationController
   end
   def update
     @project = Project.find(params[:id])
-    @user = User.find(params[:id])
-    @project.users << User.find(params[:id])
-      redirect_to '/admin'
 
+    if params[:user_ids] == nil
+      render 'projects/show'
+    else
+      @users = User.find(params[:user_ids])
+      @project.users << @users
+      redirect_to :back
+    end
   end
 
   private
   def project_params
-    params.require(:project).permit(:name,:description)
+    params.require(:project).permit(:name,:description,{:user_ids => []})
   end
 
 end

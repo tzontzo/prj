@@ -1,9 +1,9 @@
-<p>Project: <%= @current_project.name%></p>
+<p>Project: <%= @project.name%></p>
 
-<p>Details: <%= @current_project.description %></p>
+<p>Details: <%= @project.description %></p>
 
 
-<% @user = User.all%>
+<% @user = User.where.not(role: 'admin')%>
 
 <br>
 <div>
@@ -12,7 +12,7 @@
     <tr>
       <th>Name</th>
     </tr>
-    <% @current_project.users.each do |f|%>
+    <% @project.users.each do |f|%>
         <tr>
           <td><%= f.name%></td>
         </tr>
@@ -20,16 +20,32 @@
 
   </table>
 </div>
-
+<br>
 <div>
 
+  <p>Users available:</p>
+  <table>
+    <tr>
+      <th></th>
+      <th>name</th>
+      <th>role</th>
+    </tr>
 
-  <%= form_for @current_project do |f|%>
-      <%= f.select(:users,options_from_collection_for_select(@user, :id,:name)) %>
-      <%= submit_tag 'Add user to project' %>
-  <%end %>
+      <%= form_for @project do %>
 
+          <% @user.each do |user| %>
+            <% unless @project.assigned_to?(user) %>
+            <tr>
+              <%= hidden_field_tag 'project[user_ids][]',nil %>
+              <td><%= check_box_tag 'user_ids[]', user.id%></td>
+              <td><%= user.name %></td>
+              <td><%= user.role %></td>
+                <%end%>
+          <% end%>
+
+        </tr>
+        <%= submit_tag 'Add user to project' %>
+      <%end %>
+  </table>
 
 </div>
-
-
