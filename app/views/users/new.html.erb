@@ -1,10 +1,23 @@
-<h1 style="text-align: center">Create new user</h1>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <link href="bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h2 >Create new user </h2>
+</div  >
 
+<div class="text-center">
 <%= form_for(@user) do |f| %>
-    <p style="margin-left:40%"><%= f.text_field :name, :placeholder => "Name" %></p>
-    <p style="margin-left:40%"><%= f.email_field :email, :placeholder => "Email" %></p>
-    <p style="margin-left:40%"><%= f.password_field :password, :placeholder => "Password" %></p>
-    <p style="margin-left:40%"><%= f.select :role, ['admin','team leader', 'programmer'] %></p>
-    <p style="margin-left:40%"><%= f.submit "Create an account" %></p>
+    <p ><%= f.text_field :name, :placeholder => "Name" %></p>
+    <p ><%= f.email_field :email, :placeholder => "Email" %></p>
+    <p ><%= f.password_field :password, :placeholder => "Password" %></p>
+    <p><%= f.select :role, ['admin','team leader', 'programmer'] %></p>
+    <p ><%= f.submit "Create an account" %></p>
 <% end %>
-
+</div>
+<p class="text-center"><%= link_to 'Back', '/admin' %></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</body>
+</html>

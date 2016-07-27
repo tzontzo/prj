@@ -1,66 +1,108 @@
+<!DOCTYPE html>
+<html>
 <header >
-<h3>Hello admin</h3>
-<div id="logout_button"><%= button_to "Log out", logout_path, :method => :delete%></div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" >
+          <p>Project Management App</p>
+        </a>
+        <p class="navbar-text">Signed in as <%= User.find(session[:user_id]).name%></p>
+
+         </div>
+      <a  class="navbar-right " ><%= button_to "Log out", logout_path, :method => :delete%></a>
+    </div>
+  </nav>
 </header>
-<body>
+<body class="bg-success">
+<div >
   <p>
   <%= link_to "Add new project", controller: "projects", action: "new", id: @project %>|
-    <%= link_to "Add new user", new_user_path, action_name: "new" %>
+  <%= link_to "Add new user", new_user_path, action_name: "new" %>
 </p>
+</div>
+<br>
+<div class="row row-grid text-info">
+  <div class="col-md-4 ">
+    <div class="col-md-12 bg-info ">
 
-
-<div >
-  List of programmers:
-
-<table style="border: 1px solid">
-  <tr >
-    <th style="border: 1px solid">Name</th>
-    <th style="border: 1px solid">Email</th>
-  </tr>
+    <table class="table ">
+      <h4>List of programmers:</h4>
+      <thread>
+        <tr >
+          <th>Name</th>
+          <th>Email</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thread>
   <% @user = User.where(role: 'programmer') %>
   <% @user.each do |user| %>
-
+  <tbody>
   <tr>
-        <td style="border: 1px solid"><%= user.name %></td>
-        <td style="border: 1px solid"><%= user.email %></td>
+        <td ><%= user.name %></td>
+        <td ><%= user.email %></td>
+    <td> <%= link_to 'Edit',edit_user_path(user)%></td>
+    <td><%= link_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'}%></td>
   </tr>
+  </tbody>
   <% end %>
-</table>
-  </div>
-<br>
-<div >
-  List of team leaders:
+  </table>
+</div>
+  </div >
+  <div class="col-sm-4 ">
+    <div class="col-md-12 bg-info">
 
-<table style="border: 1px solid">
-  <tr >
-    <th style="border: 1px solid">Name</th>
-    <th style="border: 1px solid">Email</th>
+  <table class="table">
+    <h4>List of team leaders:</h4>
+  <thread>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
   </tr>
+  </thread>
   <% @user = User.where(role: 'team leader') %>
   <% @user.each do |user| %>
-
+      <tbody>
       <tr>
-        <td style="border: 1px solid"><%= user.name %></td>
-        <td style="border: 1px solid"><%= user.email %></td>
+        <td ><%= user.name %></td>
+        <td ><%= user.email %></td>
+        <td> <%= link_to 'Edit',edit_user_path(user)%></td>
+        <td><%= link_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'}%></td>
       </tr>
+      </tbody>
   <% end %>
 </table>
 </div>
-<br>
-<div >
-  List of projects:
+</div>
 
-<table style="border: 1px solid">
+<div class="col-sm-4 ">
+  <div class="col-md-12 bg-info">
+
+  <table class="table">
+    <h4>List of projects:</h4>
+    <thread>
+      <tr>
+        <th>Name</th>
+        <th> </th>
+      </tr>
+    </thread>
   <% @project = Project.all %>
 
   <% @project.each do |project| %>
-
+      <tbody>
       <tr>
         <td><%= project.name %></td>
-        <td><%= link_to "Show",project_path(project.id)%></td>
+        <td ><%= link_to "Show" ,project_path(project.id)%></td>
+        <td ><%= link_to "Edit" ,edit_project_path(project.id)%></td>
       </tr>
+      </tbody>
   <% end %>
 </table>
 </div>
-<br>
+</div>
+</div>
 </body>
+</html>

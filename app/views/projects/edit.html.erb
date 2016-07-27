@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <link href="bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h2 >Update project </h2>
+</div  >
+
+<div class="text-center">
+  <%= form_for @project, url: new_project_path(@project) do |f| %>
+      <p ><%= f.text_field :name, :placeholder => "Name" %></p>
+      <p ><%= f.text_area :description, :placeholder => "Description"%> </p>
+
+      <p ><%= f.submit "Update project" %></p>
+  <% end %>
+
+</div>
+<p class="text-center"><%= link_to 'Back', '/admin' %></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</body>
+</html>

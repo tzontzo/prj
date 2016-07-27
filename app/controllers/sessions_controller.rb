@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
 
       end
     else
-
       redirect_to '/login', notice: "invalid credentials"
     end
   end

@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
   end
+
   def show
     @project = Project.find(params[:project_id])
   end
@@ -16,9 +17,13 @@ class ProjectsController < ApplicationController
       redirect_to '/'
     end
   end
+
+  def edit
+    @project = Project.find(params[:id])
+  end
+
   def update
     @project = Project.find(params[:id])
-
     if params[:user_ids] == nil
       render 'projects/show'
     else
@@ -29,6 +34,7 @@ class ProjectsController < ApplicationController
   end
 
   private
+
   def project_params
     params.require(:project).permit(:name,:description,{:user_ids => []})
   end

@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   get '/projects/:project_id' => 'projects#show' , as: 'project'
   resources :projects
   put '/projects/:project_id' => 'projects#update'
-
-
+  delete '/projects/:project_id' => 'projects#delete'
+  delete '/admin/:user_id' => 'user#destroy'
+  resources :users
 
 
   # The priority is based upon order of creation: first created -> highest priority.

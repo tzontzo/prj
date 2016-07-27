@@ -1,40 +1,62 @@
-<p>Project: <%= @project.name%></p>
+<!DOCTYPE html>
+<html>
+<header >
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" >
+          <p>Project: <%= @project.name%></p>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+<body class="bg-success">
+<div class="row row-grid text-info">
+  <div class="col-md-12 text-center">
+    <p  class="text-info" ><%= link_to 'Back', '/admin' %></p>
+<h4>Details: <%= @project.description %></h4>
+  </div>
+</div>
 
-<p>Details: <%= @project.description %></p>
-
-
+<div class="row row-grid text-info">
+  <div class="col-md-6 ">
+    <div class="col-md-12 bg-info ">
 <% @user = User.where.not(role: 'admin')%>
 
-<br>
-<div>
-  Users working at this project:
-  <table>
+
+  <table class="table">
+    <h4>Users working at this project:</h4>
+    <thread>
     <tr>
       <th>Name</th>
     </tr>
+    </thread>
+    <tbody>
     <% @project.users.each do |f|%>
         <tr>
           <td><%= f.name%></td>
         </tr>
     <%end%>
-
+    </tbody>
   </table>
 </div>
-<br>
-<div>
-
-  <p>Users available:</p>
-  <table>
+    </div>
+ <div class="col-sm-6 ">
+  <div class="col-md-12 bg-info">
+  <%= form_for @project do %>
+  <table class="table">
+    <h4>Users available:</h4>
+    <thread>
     <tr>
       <th></th>
       <th>name</th>
       <th>role</th>
     </tr>
-
-      <%= form_for @project do %>
-
+    </thread>
           <% @user.each do |user| %>
             <% unless @project.assigned_to?(user) %>
+            <tbody>
             <tr>
               <%= hidden_field_tag 'project[user_ids][]',nil %>
               <td><%= check_box_tag 'user_ids[]', user.id%></td>
@@ -42,10 +64,15 @@
               <td><%= user.role %></td>
                 <%end%>
           <% end%>
-
         </tr>
-        <%= submit_tag 'Add user to project' %>
-      <%end %>
+    </tbody>
   </table>
+        </div>
 
+      <%= submit_tag 'Add user to project' %>
+  <%end %>
+    </div>
 </div>
+
+</body>
+</html>
