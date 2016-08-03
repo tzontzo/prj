@@ -10,7 +10,7 @@
         <p class="navbar-text">Signed in as <%= User.find(session[:user_id]).name%></p>
 
          </div>
-      <a  class="navbar-right " ><%= button_to "Log out", logout_path, :method => :delete%></a>
+      <a  class="navbar-right " ><%= button_to "Log out", logout_path, :method => :delete,:class=>"btn btn-default btn-sm"%></a>
     </div>
   </nav>
 </header>
@@ -42,8 +42,8 @@
   <tr>
         <td ><%= user.name %></td>
         <td ><%= user.email %></td>
-    <td> <%= link_to 'Edit',edit_user_path(user)%></td>
-    <td><%= link_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'}%></td>
+    <td > <%= button_to 'Edit',edit_user_path(user),:method => "get",:class => 'btn btn-xs btn-warning'%></td>
+    <td ><%= button_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'},:class => 'btn btn-xs btn-danger'%></td>
   </tr>
   </tbody>
   <% end %>
@@ -69,8 +69,8 @@
       <tr>
         <td ><%= user.name %></td>
         <td ><%= user.email %></td>
-        <td> <%= link_to 'Edit',edit_user_path(user)%></td>
-        <td><%= link_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'}%></td>
+        <td > <%= button_to 'Edit',edit_user_path(user), :method => "get",:class => 'btn btn-xs btn-warning'%></td>
+        <td ><%= button_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'},:class => 'btn btn-xs btn-danger'%></td>
       </tr>
       </tbody>
   <% end %>
@@ -95,8 +95,8 @@
       <tbody>
       <tr>
         <td><%= project.name %></td>
-        <td ><%= link_to "Show" ,project_path(project.id)%></td>
-        <td ><%= link_to "Edit" ,edit_project_path(project.id)%></td>
+        <td ><%= button_to "Show" ,project_path(project.id), :method => "get", :class => 'btn btn-xs btn-info'%></td>
+        <td ><%= button_to "Edit" ,edit_project_path(project.id),:method => "get",:class => 'btn btn-xs btn-warning'%></td>
       </tr>
       </tbody>
   <% end %>

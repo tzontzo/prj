@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   get '/new_project' => 'projects#new'
   post '/new_project' => 'projects#create'
+  get '/new_task/:project_id' => 'tasks#new'
+  post '/projects/:project_id/tasks/new' => 'tasks#create'
+
   get '/admin' => 'users#admin'
   get '/programmer' => 'users#programmer'
   get '/team_leader' => 'users#team_leader'
@@ -15,6 +18,11 @@ Rails.application.routes.draw do
   delete '/projects/:project_id' => 'projects#delete'
   delete '/admin/:user_id' => 'user#destroy'
   resources :users
+  get '/tasks' => 'tasks#index'
+
+  resources :projects do
+    resources :tasks
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

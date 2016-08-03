@@ -42,9 +42,10 @@
   </table>
 </div>
     </div>
+  <%= form_for @project do %>
  <div class="col-sm-6 ">
   <div class="col-md-12 bg-info">
-  <%= form_for @project do %>
+
   <table class="table">
     <h4>Users available:</h4>
     <thread>
@@ -69,7 +70,7 @@
   </table>
         </div>
 
-      <%= submit_tag 'Add user to project' %>
+      <p><%= submit_tag 'Add user to project', :class => 'btn btn-success' %></p>
   <%end %>
     </div>
 </div>

@@ -10,11 +10,34 @@
         <p class="navbar-text">Signed in as <%= User.find(session[:user_id]).name%></p>
 
       </div>
-      <a  class="navbar-right " ><%= button_to "Log out", logout_path, :method => :delete%></a>
+      <a  class="navbar-right " ><%= button_to "Log out", logout_path, :method => :delete,:class=>"btn btn-default btn-sm"%></a>
     </div>
   </nav>
 </header>
-<body>
+<body class="bg-success">
+<% @user = User.find(session[:user_id])%>
 
-</body>
-</html>
+<div class="row row-grid text-info">
+  <div class="col-md-12 ">
+    <div class="col-md-12 bg-info ">
+      <%= @user.projects.find_each do |p|%>
+          <table class="table ">
+            <h4 class="text-center">List of my projects:</h4>
+            <thead class="text-center">
+            <tr>
+              <th class="text-center">Name</th>
+            </tr>
+
+            </thead>
+            <tbody class="text-center">
+            <tr>
+
+              <td><%=link_to p.name, controller: 'tasks', action: 'index', :project_id => p.id%></td>
+            </tr>
+            </tbody>
+      <%end%>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
