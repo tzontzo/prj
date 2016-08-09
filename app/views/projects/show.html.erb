@@ -30,20 +30,21 @@
     <thread>
     <tr>
       <th>Name</th>
+      <th></th>
     </tr>
     </thread>
     <tbody>
     <% @project.users.each do |f|%>
         <tr>
           <td><%= f.name%></td>
-          <td ><%= button_to 'Delete',controller: 'projects',action: 'delete_user',user_id: f.id, data: { confirm: 'Are you sure?'},class: 'btn btn-xs btn-danger'%></td>
+          <td ><%= button_to 'Delete',{controller: 'projects',action: 'delete_user',user_id: f.id}, data: { confirm: 'Are you sure?'},class: 'btn btn-xs btn-danger'%></td>
         </tr>
     <%end%>
     </tbody>
   </table>
 </div>
     </div>
-  <%= form_for @project do %>
+  <%= form_tag controller: 'projects',action: 'add_user', method: :post do  %>
  <div class="col-sm-6 ">
   <div class="col-md-12 bg-info">
 
@@ -61,7 +62,7 @@
             <tbody>
             <tr>
               <%= hidden_field_tag 'project[user_ids][]',nil %>
-              <td><%= check_box_tag "user_ids[#{user.id}]", user.id%></td>
+              <td><%= check_box_tag 'user_ids[]', user.id%></td>
               <td><%= user.name %></td>
               <td><%= user.role %></td>
                 <%end%>

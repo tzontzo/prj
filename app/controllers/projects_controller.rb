@@ -36,6 +36,12 @@ class ProjectsController < ApplicationController
     @project.users.delete(@user)
     redirect_to :back
   end
+  def add_user
+    @project = Project.find(params[:id])
+    @user = User.find(params[:user_ids])
+    @project.users << @user
+    redirect_to :back
+  end
   private
 
   def project_params

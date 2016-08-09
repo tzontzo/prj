@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :tasks
   end
   post '/projects/:id/delete_user/:user_id' => 'projects#delete_user'
+  post '/projects/:id/add_user' => 'projects#add_user'
 
 
 
