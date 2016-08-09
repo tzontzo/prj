@@ -19,7 +19,7 @@
 <body class="bg-success">
 <div class="row row-grid text-info">
   <div class="col-md-12 text-center">
-    <p  class="text-info" ><%= link_to 'Back', :back%></p>
+    <p  class="text-info" ><%= link_to 'Back',"/#{@user.role.gsub(' ','_')}"%></p>
   </div>
 </div>
 <br>
@@ -27,7 +27,7 @@
 <div class="row row-grid text-info">
   <div class="col-md-12 text-center">
     <% @project= Project.find(params[:project_id]).id%>
-    <p  class="text-info" ><%= link_to "Add new task", controller: 'tasks', action: 'create', :p_id => @project%></p>
+    <p  class="text-info" ><%= link_to "Add new task", new_project_task_path%></p>
   </div>
 <br>
 
@@ -36,20 +36,21 @@
     <div class="col-md-12 bg-info ">
 
       <table class="table ">
-        <h4 class="text-center">Current Tasks:</h4>
+        <h4 class="text-center">Available Tasks:</h4>
 
         <thead class="text-center">
         <tr>
           <th class="text-center">Name</th>
+          <th class="text-center"></th>
         </tr>
         </thead>
 
         <tbody>
-        <% @user.tasks.find_each do |t|%>
+        <% @user.tasks.each do |t|%>
         <tr>
 
           <td class="text-center"><%=t.title%></td>
-
+          <td class="text-center"><%= button_to 'Delete',[t.project,t],method: :delete, data: { confirm: 'Are you sure?'},class: 'btn btn-xs btn-danger'%></td>
         </tr>
         <%end%>
         </tbody>

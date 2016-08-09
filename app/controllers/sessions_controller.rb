@@ -6,16 +6,10 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      case @user.role
-        when "admin"
-          redirect_to '/admin'
-        when "programmer"
-          redirect_to '/programmer'
-        when "team leader"
-          redirect_to '/team_leader'
+      if @user.role
+        redirect_to "/#{@user.role.gsub(' ','_')}"
         else
           redirect_to '/login'
-
       end
     else
       redirect_to '/login', notice: "invalid credentials"

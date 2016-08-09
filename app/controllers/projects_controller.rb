@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:id])
   end
 
   def create
@@ -24,15 +24,18 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if params[:user_ids] == nil
-      render 'projects/show'
+    if @project.update(project_params)
+      redirect_to @project
     else
-      @users = User.find(params[:user_ids])
-      @project.users << @users
-      redirect_to :back
+      render 'edit'
     end
   end
-
+  def delete_user
+    @project = Project.find(params[:id])
+    @user  = User.find(params[:user_id])
+    @project.users.delete(@user)
+    redirect_to :back
+  end
   private
 
   def project_params

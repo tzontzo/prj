@@ -10,7 +10,7 @@
 <% @project = Project.find(params[:project_id])%>
 
 <div class="text-center">
-  <%= form_for @task, url: new_project_task_path(@project,@task) do |f| %>
+  <%= form_for :task, url: project_tasks_path do |f| %>
       <p ><%= f.text_field :title, :placeholder => "Name" %></p>
       <p ><%= f.text_area :details, :placeholder => "Description"%> </p>
 

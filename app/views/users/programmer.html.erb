@@ -15,11 +15,11 @@
   </nav>
 </header>
 <body class="bg-success">
-<% @user = User.find(session[:user_id])%>
 
 <div class="row row-grid text-info">
   <div class="col-md-12 ">
     <div class="col-md-12 bg-info ">
+      <% @user = User.find(session[:user_id])%>
       <%= @user.projects.find_each do |p|%>
           <table class="table ">
             <h4 class="text-center">List of my projects:</h4>
@@ -40,4 +40,6 @@
     </div>
   </div>
 </div>
-<br>
+
+</body>
+</html>

@@ -4,8 +4,6 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
   end
-
-
   def create
     @project = Project.find(params[:project_id])
     @user = User.find(session[:user_id])
@@ -14,11 +12,7 @@ class TasksController < ApplicationController
     @task.project_id= @project.id
     if @task.save
       session[:task_id] =@task.id
-      if @user.role== 'team leader'
-        redirect_to '/team_leader'
-      else
-        redirect_to '/programmer'
-      end
+      redirect_to project_tasks_path
     else
       redirect_to '/'
     end
@@ -29,8 +23,10 @@ class TasksController < ApplicationController
   def update
 
   end
-  def delete
-
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to :back
   end
   private
   def task_params
