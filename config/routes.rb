@@ -10,11 +10,13 @@ Rails.application.routes.draw do
   delete '/admin/:user_id' => 'user#destroy'
   resources :users
   get '/tasks' => 'tasks#index'
+
   resources :projects do
     resources :tasks
   end
   post '/projects/:id/delete_user/:user_id' => 'projects#delete_user'
   post '/projects/:id/add_user' => 'projects#add_user'
+  post '/tasks/:id/start_task' => 'tasks#start_task'
 
 
 

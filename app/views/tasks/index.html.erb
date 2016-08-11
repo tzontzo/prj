@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <header>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
   <% @user = User.find(session[:user_id])%>
   <% @project= Project.find(params[:project_id])%>
   <nav class="navbar navbar-inverse">
@@ -32,25 +33,40 @@
 <br>
 
 <div class="row row-grid text-info">
-  <div class="col-md-4 ">
+  <div class="col-md-6 ">
     <div class="col-md-12 bg-info ">
-
+      <h4 class="text-center">Available Tasks:</h4>
+      <% @project= Project.find(params[:project_id]) %>
+      <% @tasks = @project.tasks%>
       <table class="table ">
-        <h4 class="text-center">Available Tasks:</h4>
-
         <thead class="text-center">
+
         <tr>
           <th class="text-center">Name</th>
           <th class="text-center"></th>
+          <th class="text-center"></th>
+          <th class="text-center"></th>
+          <th class="text-center"></th>
+          <th>Time worked</th>
+          <th> Status </th>
         </tr>
         </thead>
-
         <tbody>
-        <% @user.tasks.each do |t|%>
+        <%  @tasks.each do |t| %>
         <tr>
-
           <td class="text-center"><%=t.title%></td>
           <td class="text-center"><%= button_to 'Delete',[t.project,t],method: :delete, data: { confirm: 'Are you sure?'},class: 'btn btn-xs btn-danger'%></td>
+          <td><%= link_to '',controller: 'tasks',action: 'start_task',id: t.id,method: :post,class: "btn btn-xs" do %>
+                <i class="glyphicon glyphicon-play "></i>  <%end%>
+          </td>
+          <td><%= link_to'', class: "btn btn-xs" do %>
+                <i class="glyphicon glyphicon-pause"></i>  <%end%>
+          </td>
+          <td><%= link_to '', class: "btn btn-xs" do %>
+                <i class="glyphicon glyphicon-stop"></i>   <%end%>
+          </td>
+          <td><%= t.time_worked%></td>
+          <td><%= t.status%></td>
         </tr>
         <%end%>
         </tbody>
@@ -62,5 +78,8 @@
   </div>
 
 <br>
+<script>
+
+</script>
 </body>
 </html>

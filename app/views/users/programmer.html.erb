@@ -19,15 +19,17 @@
 <div class="row row-grid text-info">
   <div class="col-md-12 ">
     <div class="col-md-12 bg-info ">
+      <h4 class="text-center">List of my projects:</h4>
       <% @user = User.find(session[:user_id])%>
-      <%= @user.projects.find_each do |p|%>
+
+
           <table class="table ">
-            <h4 class="text-center">List of my projects:</h4>
+
             <thead class="text-center">
             <tr>
               <th class="text-center">Name</th>
             </tr>
-
+            <%= @user.projects.find_each do |p|%>
             </thead>
             <tbody class="text-center">
             <tr>
