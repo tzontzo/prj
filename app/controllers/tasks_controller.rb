@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
-
+    @project= Project.find(params[:project_id])
+    @user = User.find(session[:user_id])
   end
 
   def new
@@ -29,19 +30,19 @@ class TasksController < ApplicationController
   def start_task
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
-    @task.started_at = Time.now
-    @task.status = "started"
+    @task.update_attributes({started_at: Time.now, status: "started"})
+
     redirect_to :back
 
   end
   def pause_task
     @task = Task.find(params[:id])
-    @task.paused_at = Time.now
-    @paused = @task.paused_at
+    @paused = Time.now
     @started = @task.started_at
     @worked = @task.time_worked
-    @task.time_worked = @worked + (@paused- @started)
-    @task.status = "paused"
+    @t_worked = Time.at(@worked.to_i + (@paused.to_i - @started.to_i))
+    @task.update_attributes({paused_at: @paused,time_worked: @t_worked, status: "paused"})
+    redirect_to :back
   end
   def stopped_task
     @task = Task.find(params[:id])
@@ -49,8 +50,9 @@ class TasksController < ApplicationController
     @ended = @task.ended_at
     @started = @task.started_at
     @worked = @task.time_worked
-    @task.time_worked = @worked + (@ended- @started)
-    @task.status = "ended"
+    @t_worked = Time.at(@worked.to_i + (@ended.to_i - @started.to_i))
+    @task.update_attributes({ended_at: @ended,time_worked: @t_worked, status: "ended"})
+    redirect_to :back
   end
   def destroy
     @task = Task.find(params[:id])
