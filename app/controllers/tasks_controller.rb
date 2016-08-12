@@ -14,6 +14,8 @@ class TasksController < ApplicationController
     @task.users << @user
     @task.project_id= @project.id
     @task.status = "not started"
+    @task.time_worked =0
+    cookies[:status]
     if @task.save
       session[:task_id] =@task.id
       redirect_to project_tasks_path
@@ -37,11 +39,12 @@ class TasksController < ApplicationController
   end
   def pause_task
     @task = Task.find(params[:id])
-    @paused = Time.now
-    @started = @task.started_at
-    @worked = @task.time_worked
-    @t_worked = Time.at(@worked.to_i + (@paused.to_i - @started.to_i))
+    @paused = Time.now.to_i
+    @started = @task.started_at.to_i
+    @worked = @task.time_worked.to_i
+    @t_worked = Time.at(@worked+ (@paused - @started))
     @task.update_attributes({paused_at: @paused,time_worked: @t_worked, status: "paused"})
+
     redirect_to :back
   end
   def stopped_task
