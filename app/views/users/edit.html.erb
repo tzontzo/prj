@@ -10,14 +10,14 @@
 
 <div class="text-center">
   <%= form_for(@user) do |f| %>
-      <p ><%= f.text_field :name, :placeholder => "Name" %></p>
-      <p ><%= f.email_field :email, :placeholder => "Email" %></p>
-      <p ><%= f.password_field :password, :placeholder => "Password" %></p>
+      <p ><%= f.text_field :name, placeholder: "Name" %></p>
+      <p ><%= f.email_field :email, placeholder: "Email" %></p>
+      <p ><%= f.password_field :password, placeholder: "Password" %></p>
       <p><%= f.select :role, ['admin','team leader', 'programmer'] %></p>
       <p ><%= f.submit "Update account" %></p>
   <% end %>
 </div>
-<p class="text-center"><%= link_to 'Back', '/admin' %></p>
+<p class="text-center"><%= link_to 'Back', '/dashboard' %></p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </body>
 </html>

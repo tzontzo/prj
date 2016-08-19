@@ -16,7 +16,7 @@
 <body class="bg-success">
 <div class="row row-grid text-info">
   <div class="col-md-12 text-center">
-    <p class="text-info"><%= link_to 'Back', "/#{@user.role.gsub(' ', '_')}" %></p>
+    <p class="text-info"><%= link_to 'Back', "/dashboard" %></p>
   </div>
 </div>
 <br>
@@ -29,7 +29,7 @@
   <br>
 
   <div class="row row-grid text-info">
-    <div class="col-md-6 ">
+    <div class="col-md-8 ">
       <div class="col-md-12 bg-info ">
         <h4 class="text-center">Available Tasks:</h4>
         <table class="table ">
@@ -92,12 +92,17 @@
           </tbody>
 
         </table>
+
       </div>
     </div>
+    <%= render 'sameprojectusers' %>
   </div>
+
 </div>
 
 <br>
+
+
 <script>
 </script>
 </body>

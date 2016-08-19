@@ -1,16 +1,18 @@
 class TasksController < ApplicationController
   def index
     @project= Project.find(params[:project_id])
-    @user = User.find(session[:user_id])
+    @user = User.find(session[:id])
   end
-
+  def show
+    @task = Task.find(params[:id])
+  end
   def new
     @task = Task.new
   end
   def create
     @task = Task.new(task_params)
     @project = Project.find(params[:project_id])
-    @user = User.find(session[:user_id])
+    @user = User.find(session[:id])
     @task.users << @user
     @task.project_id= @project.id
     @task.status = "not started"

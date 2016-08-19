@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body class="bg-success">
+    <div class="col-md-4 ">
+      <div class="col-md-12 bg-info ">
+
+        <table class="table ">
+          <thead class="text-center">
+          <tr>
+            <th class="text-center">Users working at <%= @project.name %></th>
+          </tr>
+          </thead>
+          <% @project.users.find_each do |u| %>
+              <tbody class="text-center">
+              <tr>
+                <% if u != @user %>
+                    <td><%= u.name%></td>
+                <%end%>
+              </tr>
+              </tbody>
+          <%end%>
+        </table>
+      </div>
+    </div>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
         <p class="navbar-text">Signed in as <%= User.find(session[:user_id]).name%></p>
 
       </div>
-      <a  class="navbar-right " ><%= button_to "Log out", logout_path, :method => :delete,:class=>"btn btn-default btn-sm"%></a>
+      <a  class="navbar-right " ><%= button_to "Log out", logout_path, method: :delete, class: "btn btn-default btn-sm"%></a>
     </div>
   </nav>
 </header>
@@ -33,7 +33,7 @@
           <tbody class="text-center">
           <tr>
 
-            <td><%=link_to p.name, controller: 'tasks', action: 'index', :project_id => p.id%></td>
+            <td><%=link_to p.name, controller: 'tasks', action: 'index', project_id: p.id%></td>
           </tr>
           </tbody>
         <%end%>

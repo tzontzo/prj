@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body class="bg-success">
+
+  <div class="col-md-4 ">
+    <div class="col-md-12 bg-info ">
+
+      <table class="table">
+        <h4>List of projects:</h4>
+        <thread>
+          <tr>
+            <th>Name</th>
+            <th> </th>
+            <th></th>
+          </tr>
+        </thread>
+        <% Project.all.each do |project| %>
+            <tbody>
+            <tr>
+              <td><%= project.name %></td>
+              <td ><%= button_to "Show" ,project_path(project.id), method: :get, class: 'btn btn-xs btn-info'%></td>
+              <td ><%= button_to "Edit" ,edit_project_path(project.id),method: :get,class: 'btn btn-xs btn-warning'%></td>
+            </tr>
+            </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div >
+
+
+</body>
+</html>

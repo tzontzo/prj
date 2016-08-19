@@ -1,18 +1,15 @@
 class ProjectsController < ApplicationController
-
   def new
     @project = Project.new
   end
-
   def show
     @project = Project.find(params[:id])
   end
-
   def create
     @project = Project.new(project_params)
     if @project.save
       session[:project_id] =@project.id
-      redirect_to '/admin'
+      redirect_to '/dashboard'
     else
       redirect_to '/'
     end

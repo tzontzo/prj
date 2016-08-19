@@ -1,21 +1,22 @@
 Rails.application.routes.draw do
   get '/signup' => 'users#new'
-  resources :users
+
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  get '/admin' => 'users#admin'
-  get '/programmer' => 'users#programmer'
-  get '/team_leader' => 'users#team_leader'
   delete '/admin/:user_id' => 'user#destroy'
-  resources :users
-  get '/tasks' => 'tasks#index'
+  get '/dashboard' => 'dashboard#index'
 
+  resources :users
   resources :projects do
-    resources :tasks
+    resources :tasks do
+      resources :comments
+    end
   end
+
   post '/projects/:id/delete_user/:user_id' => 'projects#delete_user'
   post '/projects/:id/add_user' => 'projects#add_user'
+  get '/tasks' => 'tasks#index'
   get '/tasks/:id/start_task' => 'tasks#start_task'
   get '/tasks/:id/pause_task' => 'tasks#pause_task'
   get '/tasks/:id/stopped_task' => 'tasks#stopped_task'

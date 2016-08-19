@@ -1,2 +1,0 @@
-class Programmer<User
-end

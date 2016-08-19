@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<header >
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" >
+          <p>Project Management App</p>
+        </a>
+        <p class="navbar-text">Signed in as <%=@logged_user["name"]%></p>
+
+      </div>
+      <a  class="navbar-right " ><%= button_to "Log out", logout_path, method: :delete,class: "btn btn-default btn-sm"%></a>
+    </div>
+  </nav>
+</header>
+<body>
+<div>
+
+  <% if @logged_user["role"] == "admin" %>
+      <div class="text-center">
+      <%= link_to " Add new project", controller: :projects, action: :new,id: @project %>       |
+      <%= link_to "Add new user", new_user_path, action_name: :new %>
+      </div>
+      <br>
+
+    <div class="row row-grid text-info">
+      <%= render 'programmers'%>
+      <%=render 'projects'%>
+      <%=render 'leaders'%>
+    </div>
+
+  <% elsif @logged_user["role"] == "team leader" %>
+      <div class="row row-grid text-info">
+      <p><%= render 'myprojects'%></p>
+
+
+      </div>
+
+  <% elsif @logged_user["role"] == "programmer" %>
+      <div class="row row-grid text-info">
+        <%= render 'myprojects'%>
+      </div>
+  <%end%>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body class="bg-success">
+
+  <div class="col-md-4 ">
+    <div class="col-md-12 bg-info ">
+      <table class="table ">
+        <h4>List of programmers:</h4>
+        <thread>
+          <tr >
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thread>
+        <%   %>
+        <% User.where(role: 'programmer').each do |user| %>
+            <tbody>
+            <tr>
+              <td ><%= user.name %></td>
+              <td ><%= user.email %></td>
+              <td > <%= button_to 'Edit',edit_user_path(user),method: :get, class: 'btn btn-xs btn-warning'%></td>
+              <td ><%= button_to 'Delete',user_path(user),method: :delete, data: { confirm: 'Are you sure?'},class: 'btn btn-xs btn-danger'%></td>
+            </tr>
+            </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div >
+</body>
+</html>
