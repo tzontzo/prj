@@ -19,7 +19,7 @@
 
   <% if @logged_user["role"] == "admin" %>
       <div class="text-center">
-      <%= link_to " Add new project", controller: :projects, action: :new,id: @project %>       |
+      <%= link_to " Add new project", new_project_path,action_name: :new %>       |
       <%= link_to "Add new user", new_user_path, action_name: :new %>
       </div>
       <br>

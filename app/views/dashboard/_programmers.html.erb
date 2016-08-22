@@ -8,15 +8,15 @@
   <div class="col-md-4 ">
     <div class="col-md-12 bg-info ">
       <table class="table ">
-        <h4>List of programmers:</h4>
-        <thread>
+        <h4 class="text-center">List of programmers:</h4>
+        <thead>
           <tr >
             <th>Name</th>
             <th>Email</th>
             <th></th>
             <th></th>
           </tr>
-        </thread>
+        </thead>
         <%   %>
         <% User.where(role: 'programmer').each do |user| %>
             <tbody>

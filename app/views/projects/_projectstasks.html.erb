@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<div class="col-md-4 ">
+  <div class="col-md-12 bg-info ">
+    <h4 class="text-center">Existing Tasks:</h4>
+    <table class="table ">
+      <thead class="text-center">
+      <tr>
+        <th class="text-center">Name</th>
+        <th class="text-center">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @project.tasks.each do |t| %>
+          <tr>
+            <td class="text-center"><%= t.title %></td>
+            <td class="text-center"><%= t.status %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

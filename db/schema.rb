@@ -52,18 +52,23 @@ ActiveRecord::Schema.define(version: 20160727131316) do
   add_index "task_users", ["user_id"], name: "index_task_users_on_user_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "project_id",  limit: 4
-    t.string   "title",       limit: 255
-    t.string   "details",     limit: 255
-    t.integer  "time_worked", limit: 4
+    t.integer  "creator_id",       limit: 4
+    t.integer  "assigned_user_id", limit: 4
+    t.integer  "project_id",       limit: 4
+    t.string   "title",            limit: 255
+    t.string   "details",          limit: 255
+    t.integer  "time_worked",      limit: 4
     t.datetime "started_at"
-    t.datetime "paused_at"
+    t.datetime "pause_started_at"
+    t.datetime "pause_ended_at"
     t.datetime "ended_at"
-    t.string   "status",      limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "status",           limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
+  add_index "tasks", ["assigned_user_id"], name: "index_tasks_on_assigned_user_id", using: :btree
+  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id", using: :btree
   add_index "tasks", ["details"], name: "index_tasks_on_details", using: :btree
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
   add_index "tasks", ["title"], name: "index_tasks_on_title", using: :btree

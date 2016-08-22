@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<div class="col-md-4 ">
+  <div class="col-md-12 bg-info ">
+    <% @user = User.where.not(role: 'admin')%>
+
+<h4 class="text-center">Users working at this project:</h4>
+    <table class="table">
+      
+      <thead>
+
+        <tr>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @project.users.each do |f|%>
+          <tr>
+            <td><%= f.name%></td>
+            <td ><%= button_to 'Delete',{controller: 'projects',action: 'delete_user',user_id: f.id}, data: { confirm: 'Are you sure?'},class: 'btn btn-xs btn-danger'%></td>
+          </tr>
+      <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

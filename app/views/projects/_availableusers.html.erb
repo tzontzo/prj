@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<%= form_tag controller: 'projects',action: 'add_user', method: :post do  %>
+    <div class="col-sm-4 ">
+      <div class="col-md-12 bg-info">
+ <h4 class="text-center">Users available:</h4>
+        <table class="table">
+         
+          <thead >
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <% @user.each do |user| %>
+              <% unless @project.assigned_to?(user) %>
+                  <tbody>
+                  <tr>
+                    <%= hidden_field_tag 'project[user_ids][]',nil %>
+                    <td><%= check_box_tag 'user_ids[]', user.id%></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.role %></td>
+              <%end%>
+          <% end%>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><%= submit_tag 'Add user to project', :class => 'btn btn-success' %></p>
+<%end %>
+</div>
+</body>
+</html>

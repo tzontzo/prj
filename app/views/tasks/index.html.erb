@@ -28,82 +28,19 @@
   </div>
   <br>
 
-  <div class="row row-grid text-info">
-    <div class="col-md-8 ">
-      <div class="col-md-12 bg-info ">
-        <h4 class="text-center">Available Tasks:</h4>
-        <table class="table ">
-          <thead class="text-center">
 
-          <tr>
-            <th class="text-center">Name</th>
-            <th class="text-center"></th>
-            <th class="text-center"></th>
-            <th class="text-center"></th>
-            <th class="text-center"></th>
-            <th>Time worked</th>
-            <th> Status</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @project.tasks.each do |t| %>
-              <tr>
-                <td class="text-center"><%= t.title %></td>
-                <td class="text-center"><%= button_to 'Delete', [t.project, t], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger' %></td>
-                <% if t.status == "not started" %>
+ <div class="row row-grid text-info">
+ <%= render "notstarted" %>
+ <%= render "started" %>
+ <%= render "ended" %>
 
-                    <td><%= link_to '<i  class="glyphicon glyphicon-play "></i>'.html_safe, {controller: 'tasks', action: 'start_task', id: t.id, project_id: @project.id},
-                                    class: "btn btn-xs", id: "start_b" %>
-                    </td>
-                    <td></td>
-                    <td></td>
-                <% else
-                     if t.status == "started" %>
-                        <td></td>
-                        <td><%= link_to '<i class="glyphicon glyphicon-pause"></i>'.html_safe, {controller: 'tasks', action: 'pause_task', id: t.id, project_id: @project.id},
-                                        class: "btn btn-xs", id: "pause_b" %>
-
-                        </td>
-                        <td><%= link_to '<i class="glyphicon glyphicon-stop"></i>'.html_safe, {controller: 'tasks', action: 'stopped_task', id: t.id, project_id: @project.id},
-                                        class: "btn btn-xs", id: "stop_b" %>
-                        </td>
-                    <% else
-                         if t.status == "paused" %>
-                            <td><%= link_to '<i  class="glyphicon glyphicon-play "></i>'.html_safe, {controller: 'tasks', action: 'start_task', id: t.id, project_id: @project.id},
-                                            class: "btn btn-xs", id: "start_b" %>
-                            </td>
-                            <td></td>
-                            <td>
-                            </td>
-                        <% else
-                             if t.status == "ended" %>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-
-                <td><%= t.time_worked %> seconds</td>
-                <td><%= t.status %></td>
-              </tr>
-          <% end %>
-          </tbody>
-
-        </table>
-
-      </div>
-    </div>
-    <%= render 'sameprojectusers' %>
-  </div>
-
+ 
+ </div>
+<div>
+<br>
+<%= render 'sameprojectusers' %>
+</div>
 </div>
 
-<br>
-
-
-<script>
-</script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body class="bg-success">
+<div class="col-md-4 ">
+<div class="col-md-12 bg-info ">
+        <h4 class="text-center">Ended Tasks:</h4>
+        <table class="table ">
+          <thead class="text-center">
+
+          <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center"></th>
+            <th class="text-center">Time worked</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @project.tasks.each do |t| %>
+              <tr>
+                <% if t.status == "ended" %>
+                <td class="text-center"><%= t.title %></td>
+                <td class="text-center"><%= button_to 'Delete', [t.project, t], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger' %>  </td>   
+                
+                <td><%= t.time_worked %> seconds</td><% end %>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+</div>
+</div>
+</body>
+</html>
