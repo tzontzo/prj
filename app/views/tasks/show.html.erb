@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<header >
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" >
+          <p>Task: <%= @task.title%></p>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+<body class="bg-success">
+<div class="row row-grid text-info">
+  <div class="col-md-12 text-center">
+    <p  class="text-info" ><%= link_to 'Back', '/tasks' %></p>
+<h4>Details: <%= @project.description %></h4>
+  </div>
+</div>
+
+<div class="row row-grid text-info">
+
+</div>
+
+</body>
+</html>

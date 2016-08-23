@@ -32,8 +32,10 @@ class TasksController < ApplicationController
   def start_task
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+    @user= User.find(session[:id])
+    @task.users << @user
     if @task.status == "not started"
-      @task.update_attributes({started_at: Time.now, status: "started"})
+      @task.update_attributes({assigned_user_id: @user.id,started_at: Time.now, status: "started"})
     end
       @task.update_attributes({pause_ended_at: Time.now, status: "started"})
     redirect_to :back

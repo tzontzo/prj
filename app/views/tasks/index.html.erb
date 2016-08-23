@@ -31,14 +31,20 @@
 
  <div class="row row-grid text-info">
  <%= render "notstarted" %>
- <%= render "started" %>
+ <% if @user.role == "team leader"%>
+      <%= render "started" %>
+ <% elsif @user.role == "programmer" %>
+      <%= render "mytasks" %>
+ <% end %>
  <%= render "ended" %>
 
  
  </div>
 <div>
 <br>
+<% if @user.role == "team leader"%>
 <%= render 'sameprojectusers' %>
+<%end%>
 </div>
 </div>
 
