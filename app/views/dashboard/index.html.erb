@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html>
-<header >
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" >
-          <p>Project Management App</p>
-        </a>
-        <p class="navbar-text">Signed in as <%=@logged_user["name"]%></p>
-
-      </div>
-      <a  class="navbar-right " ><%= button_to "Log out", logout_path, method: :delete,class: "btn btn-default btn-sm"%></a>
-    </div>
-  </nav>
-</header>
-<body>
 <div>
 
   <% if @logged_user["role"] == "admin" %>
@@ -44,6 +27,3 @@
   <%end%>
 </div>
 
-
-</body>
-</html>

@@ -2,19 +2,23 @@ class TasksController < ApplicationController
   def index
     @project= Project.find(params[:project_id])
     @user = User.find(session[:id])
+    @page_title = "Project: #{@project.name}"
+
   end
   def show
     @task = Task.find(params[:id])
   end
   def new
     @task = Task.new
+    @users = User.all
   end
   def create
     @task = Task.new(task_params)
     @project = Project.find(params[:project_id])
     @user = User.find(session[:id])
-    @task.users << @user
-    @task.update_attributes({creator_id: @user.id,project_id: @project.id,status: "not started", time_worked: 0})
+    @assigned = User.find(params[:assigned_user])
+
+    @task.update_attributes({creator_id: @user.id,assigned_user_id: @assigned.id,project_id: @project.id,status: "not started", time_worked: 0})
     if @task.save
       session[:task_id] =@task.id
       redirect_to project_tasks_path
@@ -33,9 +37,8 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
     @user= User.find(session[:id])
-    @task.users << @user
     if @task.status == "not started"
-      @task.update_attributes({assigned_user_id: @user.id,started_at: Time.now, status: "started"})
+      @task.update_attributes({started_at: Time.now, status: "started"})
     end
       @task.update_attributes({pause_ended_at: Time.now, status: "started"})
     redirect_to :back

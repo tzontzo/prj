@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :init_logged_user, only: [:new, :create]
 
   def new
+      render layout: false
   end
   def create
     @user = User.find_by_email(params[:session][:email])
@@ -19,4 +20,5 @@ class SessionsController < ApplicationController
     session[:id] = nil
     redirect_to '/login'
   end
+
 end

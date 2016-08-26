@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   end
   def show
     @project = Project.find(params[:id])
+    @page_title = "Project: #{@project.name}"
   end
   def create
     @project = Project.new(project_params)

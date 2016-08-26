@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-  <link href="bootstrap.css" rel="stylesheet">
-</head>
-<body>
+
 <div class="jumbotron text-center">
   <h2>Create new task </h2>
 </div>
@@ -13,12 +8,9 @@
   <%= form_for :task, url: project_tasks_path do |f| %>
       <p ><%= f.text_field :title,placeholder: "Name" %></p>
       <p ><%= f.text_area :details, placeholder: "Description"%> </p>
-
+      <p> <%= select_tag 'assigned_user', options_for_select(@users.collect{ |u| [u.name,u.id]}) %> </p>
       <p ><%= f.submit "Create task" %></p>
 
   <% end %>
 </div>
 <p class="text-center"><%= link_to 'Back', :back %></p>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-</body>
-</html>
