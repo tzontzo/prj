@@ -5,6 +5,7 @@
           <thead class="text-center">
 
           <tr>
+            <th></th>
             <th class="text-center">Name</th>
             <th class="text-center">Creator</th>
             <th class="text-center">Assigned user</th>
@@ -18,8 +19,9 @@
           <% @project.tasks.each do |t| %>
               <tr>
                 <% if t.status == "started" %>
+                <td class="text-center"> </td>
                 <td class="text-center"><%= t.title %></td>
-                    <td class="text-center"><%= User.find(t.creator_id).name %></td>
+                <td class="text-center"><%= User.find(t.creator_id).name %></td>
                 <td class="text-center"><%= User.find(t.assigned_user_id).name %></td>
                 <td><%= link_to '<i class="glyphicon glyphicon-pause"></i>'.html_safe, {controller: 'tasks', action: 'pause_task', id: t.id, project_id: @project.id},
                                         class: "btn btn-xs", id: "pause_b" %></td>

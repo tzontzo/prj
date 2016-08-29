@@ -2,10 +2,41 @@
 <div class="row row-grid text-info">
   <div class="col-md-12 text-center">
     <p  class="text-info" ><%= link_to 'Back', '/tasks' %></p>
-<h4>Details: <%= @project.description %></h4>
+
+  </div>
+
+  <div class="col-md-3 col-md-offset-1 bg-info">
+    <p >Task title: <%= @task.title %></p>
+    <p >Details: <%= @task.details %></p>
+    <p >Creator: <%= @task.creator.name %></p>
+    <p >Assigned user: <%= @task.assigned_user.name %></p>
+  </div>
+
+  <div class="col-md-8">
+    <h4>Comments</h4>
+    <% @task.comments.each do |comment|%>
+    <div class="col-md-12 bg-info" >
+
+      <p>
+        <strong>Comenter:</strong>
+        <%= User.find(comment.user_id).name%>
+      </p>
+          <p>
+            <strong>Comment:</strong>
+            <%= comment.content %>
+          </p>
+      <% end %>
+    <h2>Add a comment:</h2>
+    <%= form_for(new_project_task_comment_path) do |f| %>
+        <p>
+          <%= f.label :content %><br>
+          <%= f.text_area :content%>
+        </p>
+        <p>
+          <%= f.submit %>
+        </p>
+    <% end %>
   </div>
 </div>
-
-<div class="row row-grid text-info">
-
 </div>
+

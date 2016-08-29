@@ -3,11 +3,13 @@ class CommentsController < ApplicationController
   end
   def new
     @comment = Comment.new
-      end
+  end
   def show
    @comment = Comment.find(params[:id])
   end
   def create
+    @task = Task.find(params[:task_id])
+    @comment = @task.comments.create(comment_params)
 
   end
   def edit
@@ -20,7 +22,7 @@ class CommentsController < ApplicationController
 
   end
   private
-  def task_params
+  def comment_params
     params.require(:comment).permit(:content)
   end
 end
