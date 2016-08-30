@@ -27,13 +27,14 @@
           </p>
       <% end %>
     <h2>Add a comment:</h2>
-    <%= form_for(new_project_task_comment_path) do |f| %>
+    <%= form_for new_project_task_comment_path do |f| %>
         <p>
           <%= f.label :content %><br>
           <%= f.text_area :content%>
+
         </p>
         <p>
-          <%= f.submit %>
+          <%= f.submit "Add comment" %>
         </p>
     <% end %>
   </div>

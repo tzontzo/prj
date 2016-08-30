@@ -1,0 +1,33 @@
+
+<div class="col-md-4 col-md-offset-4">
+  <div class="col-md-12 bg-info ">
+    <h4 class="text-center">Last 2 added tasks:</h4>
+    <table class="table ">
+      <thead class="text-center">
+
+      <tr>
+        <th class="text-center">Title</th>
+        <th class="text-center">Project name</th>
+
+        <th class="text-center">Creator</th>
+        <th class="text-center">Assigned user</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <% Task.last(2).each do |f| %>
+              <tr class="text-center">
+                   <td class="text-center"><%= f.title  %></td>
+                   <td class="text-center"><%= f.project.name  %></td>
+                    <td class="text-center"><%= f.creator.name %></td>
+                    <td class="text-center"><%= f.assigned_user.name %></td>
+                <%end%>
+              </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+

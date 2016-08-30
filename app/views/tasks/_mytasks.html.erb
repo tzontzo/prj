@@ -34,6 +34,8 @@
 
 
                 <% elsif t.status == "paused" %>
+                    <td class="text-center"><%=  link_to '<i class="glyphicon glyphicon-hand-right"></i>'.html_safe, {controller: 'tasks', action: 'show', id: t.id, project_id: @project.id},
+                                                         class: "btn btn-xs" %> </td>
                 <td class="text-center"><%= t.title %></td>
                     <td class="text-center"><%= User.find(t.creator_id).name %></td>
                 <td><%= link_to '<i  class="glyphicon glyphicon-play "></i>'.html_safe, {controller: 'tasks', action: 'start_task', id: t.id, project_id: @project.id},

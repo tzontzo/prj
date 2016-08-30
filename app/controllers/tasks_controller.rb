@@ -17,7 +17,6 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @user = User.find(session[:id])
     @assigned = User.find(params[:assigned_user])
-
     @task.update_attributes({creator_id: @user.id,assigned_user_id: @assigned.id,project_id: @project.id,status: "not started", time_worked: 0})
     if @task.save
       session[:task_id] =@task.id
@@ -73,6 +72,7 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to :back
   end
+
   private
   def task_params
     params.require(:task).permit(:title,:details)
