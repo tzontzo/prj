@@ -1,0 +1,68 @@
+<% @user = User.find(session[:id])%>
+<div class="col-md-6  " style="height: 300px;  overflow:auto;" >
+  <div class="col-md-12 bg-info ">
+    <h4>Notes
+    <button class="navbar-right glyphicon glyphicon-plus " onclick="shown()"></button>
+    </h4>
+    <div id="messageDialog" class="hidden">
+      <p class="navbar-right">
+     <%= form_for ([@user,@user.notes.build]) do |f| %>
+      <p>
+      <%= f.text_area :content, id: 'area'%>
+
+      <% if @logged_user["role"] == "programmer"%>
+          <%= f.hidden_field :note_type,value: 'personal' %>
+       <% else%>
+      <%= f.select :note_type, ['personal', 'company-wide'] %>
+          <%end%>
+      </p>
+        <p class="navbar-right" >
+          <%= f.submit "Add note",:onclick => "return is_empty();" %>
+        </p>
+    <% end %>
+        <button onclick="hided()">Cancel</button>
+    </div>
+
+    <table class="table ">
+      <thead class="text-center">
+      <tr>
+        <th class="text-center">Date</th>
+        <th class="text-center">Content</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% Note.where("user_id=? or note_type=?",@logged_user["id"], 'company-wide').each  do |f| %>
+          <tr class="text-center">
+            <td class="text-center"><%= f.created_at.to_date  %></td>
+            <td class="text-center"><%= f.content %></td>
+            <td>
+            <% if f.user_id == @logged_user["id"]%>
+              <%= button_to 'Delete', [f.user, f], method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger'%>
+              <%end%>
+            </td>
+      </tr>
+      <%end%>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<script>
+   function shown(){
+     $("#messageDialog").removeClass('hidden');
+   }
+   function hided(){
+     $("#messageDialog").addClass('hidden');
+   }
+   function is_empty(){
+     var textarea = document.getElementById('area');
+     if(textarea.value === "" ) {
+       alert( "Note cannot be empty!" );
+       return false;
+     }
+     return true;
+   }
+</script>
+

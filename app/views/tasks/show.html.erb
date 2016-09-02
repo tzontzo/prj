@@ -1,8 +1,11 @@
 
 <div class="row row-grid text-info">
   <div class="col-md-12 text-center">
-    <p  class="text-info" ><%= link_to 'Back', '/tasks' %></p>
-
+    <% if User.find(session[:id]).role == "admin"%>
+    <p  class="text-info" ><%= link_to 'Back', "/projects/#{@task.project_id}" %></p>
+        <% else %>
+    <p  class="text-info" ><%= link_to 'Back', "/projects/#{@task.project_id}/tasks" %></p>
+<%end%>
   </div>
 
   <div class="col-md-3 col-md-offset-1 bg-info">
@@ -19,7 +22,7 @@
 
       <p>
         <strong>Comenter:</strong>
-        <%= User.find(comment.user_id).name%>
+        <%= comment.user.name%>
       </p>
           <p>
             <strong>Comment:</strong>
@@ -27,7 +30,7 @@
           </p>
       <% end %>
     <h2>Add a comment:</h2>
-    <%= form_for new_project_task_comment_path do |f| %>
+    <%= form_for ([@task.project,@task,@task.comments.build]) do |f| %>
         <p>
           <%= f.label :content %><br>
           <%= f.text_area :content%>

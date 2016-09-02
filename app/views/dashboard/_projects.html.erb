@@ -1,4 +1,4 @@
-  <div class="col-md-4 ">
+  <div class="col-md-4  " style="height: 300px ; overflow: auto">
     <div class="col-md-12 bg-info ">
 
       <table class="table">
@@ -8,6 +8,7 @@
             <th>Name</th>
             <th> </th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <% Project.all.each do |project| %>
@@ -16,6 +17,7 @@
               <td><%= project.name %></td>
               <td ><%= button_to "Show" ,project_path(project.id), method: :get, class: 'btn btn-xs btn-info'%></td>
               <td ><%= button_to "Edit" ,edit_project_path(project.id),method: :get,class: 'btn btn-xs btn-warning'%></td>
+              <td ><%= button_to "Delete" ,project_path(project.id),method: :delete,data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger'%></td>
             </tr>
             </tbody>
         <% end %>

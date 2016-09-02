@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @task = Task.find(params[:task_id])
     @user = User.find(session[:id])
-    @comment.update_attributes(user_id: @user.id,task_id: @task.id)
+    @comment.update_attributes({user_id: @user.id,task_id: @task.id})
     if @comment.save
       session[:comment_id] =@comment.id
       redirect_to :back

@@ -22,8 +22,8 @@
                  <td class="text-center"><%=  link_to '<i class="glyphicon glyphicon-hand-right"></i>'.html_safe, {controller: 'tasks', action: 'show', id: t.id, project_id: @project.id},
                                                          class: "btn btn-xs" %> </td>
                 <td class="text-center"><%= t.title %></td>
-                <td class="text-center"><%= User.find(t.creator_id).name %></td>
-                <td class="text-center"><%= User.find(t.assigned_user_id).name %></td>
+                <td class="text-center"><%= t.creator.name %></td>
+                <td class="text-center"><%=t.assigned_user.name %></td>
                 <td><%= link_to '<i class="glyphicon glyphicon-pause"></i>'.html_safe, {controller: 'tasks', action: 'pause_task', id: t.id, project_id: @project.id},
                                         class: "btn btn-xs", id: "pause_b" %></td>
                 <td><%= link_to '<i class="glyphicon glyphicon-stop"></i>'.html_safe, {controller: 'tasks', action: 'stopped_task', id: t.id, project_id: @project.id},
@@ -36,9 +36,11 @@
                     <td class="text-center"><%=  link_to '<i class="glyphicon glyphicon-hand-right"></i>'.html_safe, {controller: 'tasks', action: 'show', id: t.id, project_id: @project.id},
                                                          class: "btn btn-xs" %> </td>
                 <td class="text-center"><%= t.title %></td>
-                <td class="text-center"><%= User.find(t.assigned_user_id).name %></td>
+                    <td class="text-center"><%= t.creator.name %></td>
+                    <td class="text-center"><%=t.assigned_user.name %></td>
                 <td><%= link_to '<i  class="glyphicon glyphicon-play "></i>'.html_safe, {controller: 'tasks', action: 'start_task', id: t.id, project_id: @project.id},
                                             class: "btn btn-xs", id: "start_b" %></td>
+
                 <td></td>
                 <td><%= t.time_worked %> seconds</td>
                 <td><%= t.status %></td>  

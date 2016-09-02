@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   delete '/admin/:user_id' => 'user#destroy'
   get '/dashboard' => 'dashboard#index'
 
-  resources :users
+  resources :users do
+    resources :notes
+  end
   resources :projects do
     resources :tasks do
       resources :comments

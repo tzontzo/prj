@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727131302) do
+ActiveRecord::Schema.define(version: 20160831104929) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20160727131302) do
 
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "notes", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "note_type",  limit: 255
+    t.string   "content",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "project_users", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

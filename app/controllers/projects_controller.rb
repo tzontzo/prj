@@ -40,6 +40,12 @@ class ProjectsController < ApplicationController
     @project.users << @user
     redirect_to :back
   end
+  def destroy
+    @project =Project.find(params[:id])
+    @project.destroy
+    redirect_to '/dashboard'
+
+  end
   private
 
   def project_params
