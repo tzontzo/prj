@@ -17,9 +17,9 @@
 
   <div class="col-md-8">
     <h4>Comments</h4>
+    <div class="col-md-12 " >
     <% @task.comments.each do |comment|%>
-    <div class="col-md-12 bg-info" >
-
+          <div class="bg-info">
       <p>
         <strong>Comenter:</strong>
         <%= comment.user.name%>
@@ -28,7 +28,14 @@
             <strong>Comment:</strong>
             <%= comment.content %>
           </p>
+            <% if comment.user.name == @logged_user["name"]%>
+            <p><%= button_to "Delete" ,[comment.task.project,comment.task,comment],method: :delete,data: {confirm: 'Are you sure?'},
+                             class: 'btn btn-xs btn-danger'%></p>
+                <%end%>
+          </div>
+
       <% end %>
+    </div>
     <h2>Add a comment:</h2>
     <%= form_for ([@task.project,@task,@task.comments.build]) do |f| %>
         <p>
@@ -40,7 +47,7 @@
           <%= f.submit "Add comment" %>
         </p>
     <% end %>
-  </div>
+
 </div>
 </div>
 
