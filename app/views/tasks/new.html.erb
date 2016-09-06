@@ -8,7 +8,7 @@
   <%= form_for :task, url: project_tasks_path do |f| %>
       <p ><%= f.text_field :title,placeholder: "Name" %></p>
       <p ><%= f.text_area :details, placeholder: "Description"%> </p>
-      <p> <%= select_tag 'assigned_user', options_for_select(@users.collect{ |u| [u.name,u.id]}) %> </p>
+      <p> <%= select_tag 'assigned_user', options_for_select(@users.reject{|u| u.role == "admin" }.map{|u| [u.name,u.id]})%> </p>
       <p ><%= f.submit "Create task" %></p>
 
   <% end %>

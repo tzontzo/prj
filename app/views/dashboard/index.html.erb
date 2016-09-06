@@ -6,32 +6,32 @@
       </div>
       <br>
 
-    <div class="row row-grid text-info " style="height: 350px">
+    <div class="row row-grid text-info " >
       <%= render 'programmers'%>
       <%=render 'projects'%>
       <%=render 'leaders'%>
       </div>
       <br>
-      <div class="row row-grid text-info " style="height: 350px">
+      <div class="row row-grid text-info ">
         <%= render 'notes'%>
       <%= render 'latesttasks' %>
 
     </div>
 
   <% elsif @logged_user["role"] == "team leader" %>
-      <div class="row row-grid text-info" style="height: 350px">
+      <div class="row row-grid text-info" >
       <%= render 'programmersforleaders'%>
       <%= render 'myprojects'%>
       </div>
-      <br>
-      <div class="row row-grid text-info" style="height: 350px">
+
+      <div class="row row-grid text-info" >
         <%= render 'notes'%>
       <%= render 'latesttasks' %>
       </div>
 
 
   <% elsif @logged_user["role"] == "programmer" %>
-      <div class="row row-grid text-info " style="height: 350px">
+      <div class="row row-grid text-info " >
         <%= render 'myprojects'%>
         <%= render 'latesttasks' %>
       </div>
