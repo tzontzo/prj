@@ -14,3 +14,4 @@
  *= require_self
 *= require bootstrap.min
  */
+.scrollable_block {height: 300px ;overflow:auto;}

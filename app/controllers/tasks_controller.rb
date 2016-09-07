@@ -1,3 +1,4 @@
+
 class TasksController < ApplicationController
   def index
     @project= Project.find(params[:project_id])
@@ -17,6 +18,7 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @user = User.find(session[:id])
     @assigned = User.find(params[:assigned_user])
+    @task.interval = '[]'
     @task.update_attributes({creator_id: @user.id,assigned_user_id: @assigned.id,project_id: @project.id,status: "not started", time_worked: 0})
     if @task.save
       session[:task_id] =@task.id
@@ -39,7 +41,7 @@ class TasksController < ApplicationController
     if @task.status == "not started"
       @task.update_attributes({started_at: Time.now, status: "started"})
     end
-      @task.update_attributes({pause_ended_at: Time.now, status: "started"})
+    @task.update_attributes({pause_ended_at: Time.now, status: "started"})
     redirect_to :back
   end
 
@@ -49,8 +51,14 @@ class TasksController < ApplicationController
     @pause_ended = @task.pause_ended_at.to_i
     @worked = @task.time_worked.to_i
     @t_worked = Time.at(@worked+(@paused - @pause_ended))
-    @task.update_attributes({pause_started_at: @paused,time_worked: @t_worked, status: "paused"})
+    current_intervals = JSON.parse(@task.interval)
+    current_intervals <<{
+        started_at: @task.pause_ended_at,
+        paused_at: Time.now
+                         }
+    @task.update_attributes({pause_started_at: Time.at(@paused),time_worked: @t_worked.to_i, status: "paused",interval: current_intervals.to_json})
     redirect_to :back
+
   end
 
   def stopped_task
@@ -61,9 +69,19 @@ class TasksController < ApplicationController
       @pause_ended = @task.pause_ended_at.to_i
       @worked = @task.time_worked.to_i
       @t_worked = @worked +(@ended - @pause_ended)
-      @task.update_attributes({ended_at: @ended,time_worked:Time.at( @t_worked), status: "ended"})
+      current_intervals = JSON.parse(@task.interval)
+      current_intervals << {
+          started_at: @task.pause_ended_at,
+          ended_at: Time.now
+      }
+      @task.update_attributes({ended_at: Time.at(@ended),time_worked:Time.at( @t_worked), status: "ended",interval: current_intervals.to_json})
+    else
+    current_intervals = JSON.parse(@task.interval)
+    current_intervals << {
+        ended_at: @task.pause_started_at
+    }
+    @task.update_attributes({ended_at: @task.pause_started_at,status: "ended",interval: current_intervals.to_json})
     end
-    @task.update_attributes({status: "ended"})
     redirect_to :back
   end
 

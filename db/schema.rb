@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160831104929) do
     t.datetime "pause_ended_at"
     t.datetime "ended_at"
     t.string   "status",           limit: 255
+    t.string   "interval",         limit: 255
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end

@@ -1,7 +1,5 @@
 class NotesController < ApplicationController
-
   def index
-
   end
   def show
     @note = Note.find(params[:id])
@@ -10,9 +8,9 @@ class NotesController < ApplicationController
     @note = Note.new
   end
   def create
-    @note = Note.new(note_params)
-    @user = User.find(session[:id])
-    @note.update_attributes(user_id: @user.id)
+    params = note_params
+    params[:user_id] = @logged_user["id"]
+    @note = Note.new(params)
     if @note.save
       session[:note_id] =@note.id
       redirect_to :back

@@ -15,3 +15,19 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap.min
+
+
+function shown(){
+    $("#messageDialog").removeClass('hidden');
+}
+function hided(){
+    $("#messageDialog").addClass('hidden');
+}
+function is_empty(){
+    var textarea = document.getElementById('area');
+    if(textarea.value === "" ) {
+        alert( "Note cannot be empty!" );
+        return false;
+    }
+    return true;
+}
