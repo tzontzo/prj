@@ -54,7 +54,7 @@ class TasksController < ApplicationController
     current_intervals = JSON.parse(@task.interval)
     current_intervals <<{
         started_at: @task.pause_ended_at,
-        paused_at: Time.now
+        ended_at: Time.now
                          }
     @task.update_attributes({pause_started_at: Time.at(@paused),time_worked: @t_worked.to_i, status: "paused",interval: current_intervals.to_json})
     redirect_to :back

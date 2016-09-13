@@ -17,6 +17,7 @@
 //= require bootstrap.min
 
 
+
 function shown(){
     $("#messageDialog").removeClass('hidden');
 }
@@ -31,3 +32,7 @@ function is_empty(){
     }
     return true;
 }
+
+
+
+

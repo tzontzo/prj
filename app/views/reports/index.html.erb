@@ -1,0 +1,11 @@
+
+<% @tasks.each do |i| %>
+  <%= distance_of_time_in_words(i.time_worked)%>
+<% end %>
+
+
+
+<p>Date: <input type="text" id="selector"></p>
+<script>
+  $( "#selector" ).datepicker();
+</script>

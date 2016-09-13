@@ -2,6 +2,7 @@
   <% if @logged_user["role"] == "admin" %>
       <div class="text-center">
       <%= link_to " Add new project", new_project_path,action_name: :new %>       |
+      <%= link_to "Reports", reports_path,action_name: :show%>       |
       <%= link_to "Add new user", new_user_path, action_name: :new %>
       </div>
       <br>
@@ -19,6 +20,7 @@
     </div>
 
   <% elsif @logged_user["role"] == "team leader" %>
+      <%= link_to "Reports", reports_path,action_name: :show%>
       <div class="row row-grid text-info" >
       <%= render 'programmersforleaders'%>
       <%= render 'myprojects'%>

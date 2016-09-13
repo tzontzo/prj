@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
-
+  resources :reports
 
   post '/projects/:id/delete_user/:user_id' => 'projects#delete_user'
   post '/projects/:id/add_user' => 'projects#add_user'
