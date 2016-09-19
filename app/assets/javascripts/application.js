@@ -11,11 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
+//= require jquery-ui
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 //= require bootstrap.min
-
 
 
 function shown(){
@@ -34,5 +34,21 @@ function is_empty(){
 }
 
 
+$(document).ready(function(){
+    $( "#selector" ).on('change', function(){
+        window.location = '/reports?date=' + $(this).val();
+    }).datepicker({dateFormat: "yy-mm-dd"})
+    }
+);
+$(document).ready(function(){
+    $( "#monthselect" ).on('change', function(){
+        window.location = '/reports/tasks?month=' + $(this).val();
+    }).datepicker({changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: "yy-mm"});
 
+    }
+);
 
+//= require turbolinks

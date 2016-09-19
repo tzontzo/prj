@@ -78,6 +78,7 @@ class TasksController < ApplicationController
     else
     current_intervals = JSON.parse(@task.interval)
     current_intervals << {
+        started_at: @task.pause_started_at,
         ended_at: @task.pause_started_at
     }
     @task.update_attributes({ended_at: @task.pause_started_at,status: "ended",interval: current_intervals.to_json})

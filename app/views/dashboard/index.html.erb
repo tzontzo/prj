@@ -20,7 +20,7 @@
     </div>
 
   <% elsif @logged_user["role"] == "team leader" %>
-      <%= link_to "Reports", reports_path,action_name: :show%>
+      <h3 class="text-center "><%= link_to "Reports", reports_path,action_name: :show%></h3>
       <div class="row row-grid text-info" >
       <%= render 'programmersforleaders'%>
       <%= render 'myprojects'%>

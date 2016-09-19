@@ -1,0 +1,44 @@
+
+<div class="col-md-12 scrollable_block" >
+  <div class="col-md-12 bg-info img-rounded ">
+    <h4 class="text-center"><%= params['date']%></h4>
+    <table class="table">
+
+      <thead class="text-center">
+      <tr>
+        <th class="text-center">Assigned user</th>
+        <th class="text-center">Task name</th>
+        <th class="text-center">Time worked</th>
+        <th class="text-center">Status</th>
+      </tr>
+
+      </thead>
+      <% @tasks.each do |i| %>
+          <tbody class="text-center">
+          <% if i.time_worked != nil%>
+          <tr>
+
+            <td><%=i.assigned_user.name %></td>
+            <td><%=i.title %></td>
+            <td><%= distance_of_time_in_words(i.time_worked)%></td>
+            <td><%= i.status%></td>
+
+
+          </tr>
+          <% else %>
+              <tr>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+
+              </tr>
+              <%end%>
+          </tbody>
+            <% end %>
+    </table>
+  </div>
+</div >
+

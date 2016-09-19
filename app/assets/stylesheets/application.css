@@ -16,3 +16,7 @@
 
  */
 .scrollable_block {height: 300px ;overflow:auto;}
+.ui-datepicker {
+    background: lightsteelblue;
+}
+
