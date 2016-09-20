@@ -12,7 +12,7 @@ class CreateTasks < ActiveRecord::Migration
       t.datetime :pause_ended_at
       t.datetime :ended_at
       t.string :status
-      t.string :interval
+      t.text :interval
       t.timestamps null: false
     end
   end

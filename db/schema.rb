@@ -63,9 +63,9 @@ ActiveRecord::Schema.define(version: 20160831104929) do
     t.datetime "pause_ended_at"
     t.datetime "ended_at"
     t.string   "status",           limit: 255
-    t.string   "interval",         limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.text     "interval",         limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "tasks", ["assigned_user_id"], name: "index_tasks_on_assigned_user_id", using: :btree
