@@ -15,7 +15,7 @@
       </thead>
       <% @tasks.each do |i| %>
           <tbody class="text-center">
-          <% if i.time_worked != nil%>
+          <% if i.time_worked !=0%>
           <tr>
 
             <td><%=i.assigned_user.name %></td>

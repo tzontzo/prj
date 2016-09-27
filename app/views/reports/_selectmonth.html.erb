@@ -1,1 +1,4 @@
-<p>Date: <input type="text" id="monthselect" ></p>
+<div>
+<%= date_select( "reports", "date", :order => [:month, :year] )%>
+<%= submit_tag 'go'   %>
+</div>

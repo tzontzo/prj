@@ -16,13 +16,14 @@ Rails.application.routes.draw do
     end
   end
   resources :reports
-
+  get '/reports/daily' => 'reports#daily'
   post '/projects/:id/delete_user/:user_id' => 'projects#delete_user'
   post '/projects/:id/add_user' => 'projects#add_user'
   get '/tasks' => 'tasks#index'
   get '/tasks/:id/start_task' => 'tasks#start_task'
   get '/tasks/:id/pause_task' => 'tasks#pause_task'
   get '/tasks/:id/stopped_task' => 'tasks#stopped_task'
+
 
 
 
