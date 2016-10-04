@@ -1,4 +1,4 @@
 <div>
-<%= date_select( "reports", "date", :order => [:month, :year] )%>
-<%= submit_tag 'go'   %>
+<%= date_select( "reports", "date", order: [:month, :year], default: @selected_date)%>
+<%= submit_tag 'go', id: 'submit_month_picker'   %>
 </div>

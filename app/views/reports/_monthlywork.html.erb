@@ -1,1 +1,21 @@
-<%= @selected_date%>
+
+<% @days_month.each do |key, day| %>
+    <table class="table">
+      <thead class="text-center">
+      <tr>
+
+        <th> </th>
+        <th></th>
+      </tr>
+      </thead>
+
+          <tbody>
+          <tr>
+            <td><%= key%></td>
+            <td><%= %></td>
+          </tr>
+          </tbody>
+
+    </table>
+
+<% end %>

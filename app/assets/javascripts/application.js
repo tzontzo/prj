@@ -35,11 +35,14 @@ function is_empty(){
 
 
 $(document).ready(function(){
-    $( "#selector" ).on('change', function(){
-        window.location = '/reports?date=' + $(this).val();
-    }).datepicker({dateFormat: "yy-mm-dd"})
-    }
-)
+    $( "#date_selector" ).on('change', function(){
+        window.location = '/reports/daily?date=' + $(this).val();
+    }).datepicker({dateFormat: "yy-mm-dd"});
+
+    $('#submit_month_picker').click(function(){
+        window.location = '/reports/monthly?date=' + $('#reports_date_1i').val() + '-' + $('#reports_date_2i').val();
+    });
+})
 
 
 //= require turbolinks

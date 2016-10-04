@@ -1,7 +1,6 @@
 class ReportsController < ApplicationController
   def index
-    self.daily
-    self.monthly
+    redirect_to action: :daily
   end
   def daily
 
@@ -37,9 +36,41 @@ class ReportsController < ApplicationController
     end
   end
   def monthly
-    if params[:reports]
-        reports = params[:reports]
-        @selected_date = Date.new(reports["date(3i)"].to_i, reports["date(2i)"].to_i)
+    if params[:date]
+      selected_date = "#{params[:date]}-01".to_date
+    else
+      selected_date = Date.today.at_beginning_of_month
+    end
+    @month_start = selected_date
+    @month_end = selected_date.at_end_of_month
+    @tasks = Task.where('(started_at >=? and ended_at is NULL and started_at <?) or (started_at >=? and ended_at <=?)',@month_start,@month_end,@month_start,@month_end)
+    task_intervals = []
+    @tasks.each do |t|
+      t_intervals = JSON.parse(t.interval)
+      t_intervals.collect { |i|{stated_at: Time.parse(i["started_at"]),ended_at: Time.parse(i["ended_at"]),task: t} }
+    end
+    @days_month=[]
+    (@month_start..@month_end).each do |date|
+      current_day_start = date.at_beginning_of_day
+      current_day_end = date.at_end_of_day
+      current_day_hash = {
+          is_free_day:date.instance_eval{saturday?||sunday?},
+          tasks: []
+      }
+      current_day_intervals = task_intervals.select{|i| i[:started_at] < current_day_end && i[:started_at]> current_day_start}
+      current_day_tasks={}
+      current_day_intervals.each do |i|
+        if current_day_tasks.keys.include? i[:task].id
+          current_day_tasks[i[:task].id][:time_worked] += time_worked
+        else
+          current_day_tasks[i[:tasks].id]= {
+              task_obj: i[:task],
+              time_worked: time_worked
+          }
+        end
+      end
+      current_day_hash[:tasks] = current_day_tasks
+      @days_month << current_day_hash
     end
   end
 end
