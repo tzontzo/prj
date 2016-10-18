@@ -1,9 +1,9 @@
 class ReportsController < ApplicationController
   def index
+
     redirect_to action: :daily
   end
   def daily
-
     if params['date'].nil?
       selected_day_start = Time.current.at_beginning_of_day
     else
@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
 
     @selected_day = selected_day_start
     selected_day_end = selected_day_start + 24.hours
-    @tasks = get_tasks(selected_day_start,selected_day_end)
+    @tasks = get_tasks(selected_day_start,selected_day_end,nil)
     @tasks.each do |t|
       intervals = JSON.parse(t.interval)
       seconds_worked = 0
@@ -27,6 +27,12 @@ class ReportsController < ApplicationController
     end
   end
   def monthly
+    @users = User.where('role !=?',"admin")
+    if params[:u_id] == ""
+      user_id = nil
+    else
+      user_id =User.find(params[:u_id])
+    end
     if params[:date]
       @selected_date = "#{params[:date]}-01".to_date
     else
@@ -34,7 +40,7 @@ class ReportsController < ApplicationController
     end
     @month_start = @selected_date
     @month_end = @selected_date.at_end_of_month
-    @tasks = get_tasks(@month_start,@month_end)
+    @tasks = get_tasks(@month_start,@month_end,user_id)
     @task_intervals = []
     @tasks.each do |t|
       t_intervals = JSON.parse(t.interval)
@@ -50,7 +56,7 @@ class ReportsController < ApplicationController
           tasks: []
       }
       current_day_intervals = @task_intervals.select{|i| i[:started_at] < current_day_end && i[:started_at]> current_day_start}
-      #current_day_intervals = []
+
       current_day_tasks={}
       current_day_intervals.each do |i|
         time_worked = i[:ended_at].to_i - i[:started_at].to_i
@@ -63,18 +69,23 @@ class ReportsController < ApplicationController
           }
         end
       end
+
       current_day_hash[:tasks] = current_day_tasks
       @days_month << current_day_hash
     end
   end
-  def get_tasks(started_at,ended_at)
-    Task.where('(started_at <= ? and ended_at > ? and ended_at <= ?) or
+  def get_tasks(started_at,ended_at,user_id)
+    tasks=Task.where('(started_at <= ? and ended_at > ? and ended_at <= ?) or
                          (started_at >= ? and ended_at <= ? ) or
                          (started_at >= ? and ended_at >? and started_at < ?) or
                          (started_at <? and ended_at > ?) or (started_at<? and ended_at is NULL ) or(started_at<? and started_at > ?)' ,
-                        started_at,started_at,ended_at,
-                        started_at,ended_at ,
-                        started_at,ended_at ,ended_at ,
-                        started_at,ended_at ,started_at,ended_at ,started_at)
+                     started_at,started_at,ended_at,
+                     started_at,ended_at ,
+                     started_at,ended_at ,ended_at ,
+                     started_at,ended_at ,started_at,ended_at ,started_at)
+    if user_id
+      tasks = tasks.where('assigned_user_id =?',user_id)
+    end
+    tasks
   end
 end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get '/reports/daily' => 'reports#daily'
   get '/reports/monthly' => 'reports#monthly'
+  post '/reports/monthly' => 'reports#monthly'
   post '/projects/:id/delete_user/:user_id' => 'projects#delete_user'
   post '/projects/:id/add_user' => 'projects#add_user'
   get '/tasks' => 'tasks#index'

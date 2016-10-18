@@ -8,7 +8,7 @@
         <th >Task title</th>
         <th >Project name</th>
         <th >Time Worked</th>
-        <th >Interval</th>
+
       </tr>
 
       </thead>
@@ -22,7 +22,7 @@
                  <td class="bg-success"></td>
                  <td class="bg-success"></td>
                  <td class="bg-success"></td>
-                 <td class="bg-success"></td>
+
             <% else%>
                 <% if d[:tasks].empty? %>
                     <tr>
@@ -31,7 +31,7 @@
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
-                      <td>&nbsp;</td>
+
                     </tr>
                 <% else %>
                     <% j = 0 %>
@@ -45,7 +45,6 @@
                           <td><%= f[1][:task_obj].project.name %></td>
                           <td><%= distance_of_time_in_words(f[1][:task_obj].time_worked) %></td>
 
-                          <td><%= f[1][:task_obj].interval %></td>
 
                         </tr>
                         <% j += 1 %>
