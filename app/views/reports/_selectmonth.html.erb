@@ -1,11 +1,10 @@
 <div>
 <%= date_select( "reports", "date", order: [:month, :year], default: @selected_date)%>
-<%= submit_tag 'go', id: 'submit_month_picker'   %>
-</div>
-<div>
-  <%= form_tag "/reports/monthly" do%>
-<%= select_tag "u_id",options_from_collection_for_select(@users,"id","name" ), include_blank: "All"%>
-      <%= submit_tag 'filter' %>
+<%= submit_tag 'go', id: 'submit_month_picker'  %>
+
+  <%= form_tag "/reports/monthly",class: 'filter_form' do %>
+<%= select_tag "u_id",options_from_collection_for_select(@users,"id","name" ), include_blank: "All" %>
+      <%= submit_tag 'Filter'%>
 <%end%>
 
 </div>

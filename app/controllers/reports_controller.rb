@@ -28,10 +28,10 @@ class ReportsController < ApplicationController
   end
   def monthly
     @users = User.where('role !=?',"admin")
-    if params[:u_id] == ""
-      user_id = nil
+    if params[:u_id]
+      user_id = User.find(params[:u_id])
     else
-      user_id =User.find(params[:u_id])
+      user_id = nil
     end
     if params[:date]
       @selected_date = "#{params[:date]}-01".to_date
