@@ -3,14 +3,7 @@ class ReportsController < ApplicationController
 
     redirect_to action: :daily
   end
-  def show
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render  pdf: "monthlypdf", template: "reports/monthly"
-      end
-    end
-  end
+
   def daily
     if params['date'].nil?
       selected_day_start = Time.current.at_beginning_of_day
@@ -33,7 +26,9 @@ class ReportsController < ApplicationController
       end
       t.time_worked= seconds_worked
     end
+
   end
+
   def monthly
     @users = User.where('role !=?',"admin")
     if params[:u_id] && params[:u_id].length > 0
@@ -81,7 +76,14 @@ class ReportsController < ApplicationController
       current_day_hash[:tasks] = current_day_tasks
       @days_month << current_day_hash
     end
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  pdf: "monthly",template: "reports/monthly", layout: "pdf"
+      end
+    end
   end
+
   def get_tasks(started_at,ended_at,user_id)
     tasks=Task.where('(started_at <= ? and ended_at > ? and ended_at <= ?) or
                          (started_at >= ? and ended_at <= ? ) or
