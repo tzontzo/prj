@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :comments
     end
   end
-
+  get '/reports/monthlypdf' => 'reports#show'
   get '/reports/daily' => 'reports#daily'
   get '/reports/monthly' => 'reports#monthly'
   post '/reports/monthly' => 'reports#monthly'

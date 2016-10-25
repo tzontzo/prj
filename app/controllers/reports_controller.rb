@@ -3,6 +3,14 @@ class ReportsController < ApplicationController
 
     redirect_to action: :daily
   end
+  def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  pdf: "monthlypdf", template: "reports/monthly"
+      end
+    end
+  end
   def daily
     if params['date'].nil?
       selected_day_start = Time.current.at_beginning_of_day
@@ -28,10 +36,10 @@ class ReportsController < ApplicationController
   end
   def monthly
     @users = User.where('role !=?',"admin")
-    if params[:u_id]
-      user_id = User.find(params[:u_id])
+    if params[:u_id] && params[:u_id].length > 0
+      @user_id = User.find(params[:u_id])
     else
-      user_id = nil
+      @user_id = nil
     end
     if params[:date]
       @selected_date = "#{params[:date]}-01".to_date
@@ -40,7 +48,7 @@ class ReportsController < ApplicationController
     end
     @month_start = @selected_date
     @month_end = @selected_date.at_end_of_month
-    @tasks = get_tasks(@month_start,@month_end,user_id)
+    @tasks = get_tasks(@month_start,@month_end,@user_id)
     @task_intervals = []
     @tasks.each do |t|
       t_intervals = JSON.parse(t.interval)

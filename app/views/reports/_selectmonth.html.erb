@@ -6,5 +6,13 @@
 <%= select_tag "u_id",options_from_collection_for_select(@users,"id","name" ), include_blank: "All" %>
       <%= submit_tag 'Filter'%>
 <%end%>
+</div>
+<%= link_to "Get PDF", action: :show ,format: :pdf %>
 
+<div >
+  <% if @user_id == nil %>
+  <h3 class="text-center bold">Showing monthly report for all users </h3>
+      <% else %>
+      <h3 class="text-center bold">Showing monthly report for <%= @user_id.name %></h3>
+  <%end%>
 </div>
